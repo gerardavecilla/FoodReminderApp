@@ -31,7 +31,7 @@
     app:srcCompat="@android:drawable/ic_menu_add" />
 
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/re_list_view"
         android:layout_height="511dp"
         android:layout_gravity="bottom"
         android:layout_width="match_parent">

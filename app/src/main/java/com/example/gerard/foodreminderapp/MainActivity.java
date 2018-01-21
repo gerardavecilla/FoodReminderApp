@@ -18,31 +18,43 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-    private ListView mListView;
-    protected ArrayAdapter<FoodItem> listAdapter;
-    ArrayList<FoodItem> foodList = new ArrayList<>();
 
+public class MainActivity extends AppCompatActivity {
+
+    private ListView mListView;
+    protected UsersAdapter arrayAdapter;
+    public static ArrayList<FoodItem> foodList = new ArrayList<>();
+
+    public void openDialog(View view){
+        Intent intent = new Intent(this, DialogActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //FoodItem banana = new FoodItem("banana", 111);
-        //foodList.add(banana);
 
-        
+
         super.onCreate(savedInstanceState);
-        mListView = findViewById(R.id.list_view);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        ListView listView = (ListView) findViewById(R.id.re_list_view);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialog(view);
             }
         });
+
+
+        mListView = findViewById(R.id.re_list_view);
+
+//        arrayAdapter arrayAdapter= new ArrayAdapter<>(this, R.layout.content_main, foodList);
+        arrayAdapter = new UsersAdapter(this, foodList);
+        listView.setAdapter(arrayAdapter);
+
     }
 
     @Override
@@ -50,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-    public void openDialog(View view){
-        Intent intent = new Intent(this, DialogActivity.class);
-        startActivity(intent);
     }
 
     @Override
